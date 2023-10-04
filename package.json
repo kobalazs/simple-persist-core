@@ -1,0 +1,23 @@
+{
+  "name": "simple-persist",
+  "version": "0.0.1",
+  "description": "Typescript decorator for persisting data in browser applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kobalazs/simple-persist.git"
+  },
+  "author": "Balazs Kovacs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kobalazs/simple-persist/issues"
+  },
+  "homepage": "https://github.com/kobalazs/simple-persist#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
