@@ -8,12 +8,12 @@ type PersistStorageKey = (typeof PersistStorage)[keyof typeof PersistStorage];
 
 export interface PersistConfig {
   key?: string,
-  storage: PersistStorageKey
+  storage?: PersistStorageKey
 }
 
-export const Persist = (config: PersistConfig) => ((target: any, memberName: string) => {
-  const storage = window[config.storage];
-  const key = config.key ?? memberName;
+export const Persist = (config?: PersistConfig) => (target: any, memberName: string): void => {
+  const storage = window[config?.storage ?? PersistStorage.LocalStorage];
+  const key = config?.key ?? memberName;
   let value: any = target[memberName] ?? JSON.parse(storage.getItem(key) ?? 'null');
 
   Object.defineProperty(target, memberName, {
@@ -23,4 +23,4 @@ export const Persist = (config: PersistConfig) => ((target: any, memberName: str
     },
     get: () => value,
   });
-});
+};
