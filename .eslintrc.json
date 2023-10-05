@@ -1,7 +1,23 @@
 {
-  "extends": ["airbnb", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended", 
+    "plugin:import/recommended",
+    "airbnb-typescript/base"
+  ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+
+"settings": {
+  "react": {
+    "version": "detect"
+  }
+},
+  "parserOptions": {
+    "project": [
+      "tsconfig.json"
+    ],
+    "createDefaultProgram": true
+  },
   "root": true,
   "rules": {
     "max-len": ["error", { "code": 180 }]
