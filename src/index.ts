@@ -1,23 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/naming-convention */
 
-export const Storage = {
+export const PersistStorage = {
   LocalStorage: 'localStorage',
   SessionStorage: 'sessionStorage',
 } as const;
-type StorageKey = (typeof Storage)[keyof typeof Storage];
+type PersistStorageKey = (typeof PersistStorage)[keyof typeof PersistStorage];
 
-export const Persist = (key?: string, storage: StorageKey = Storage.LocalStorage) => ((target: any, memberName: string) => {
-  if (key === undefined) {
-    key = memberName;
-  }
+export interface PersistConfig {
+  key?: string,
+  storage: PersistStorageKey
+}
 
-  let currentValue: any = target[memberName] ?? JSON.parse(window[storage].getItem(key) ?? 'null');
+export const Persist = (config: PersistConfig) => ((target: any, memberName: string) => {
+  const storage = window[config.storage];
+  const key = config.key ?? memberName;
+  let value: any = target[memberName] ?? JSON.parse(storage.getItem(key) ?? 'null');
 
   Object.defineProperty(target, memberName, {
     set: (newValue: any) => {
-      window[storage].setItem(key as string, JSON.stringify(newValue));
-      currentValue = newValue;
+      storage.setItem(key as string, JSON.stringify(newValue));
+      value = newValue;
     },
-    get: () => currentValue,
+    get: () => value,
   });
 });

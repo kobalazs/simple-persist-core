@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
