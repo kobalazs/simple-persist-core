@@ -20,6 +20,7 @@
   },
   "root": true,
   "rules": {
-    "max-len": ["error", { "code": 180 }]
+    "max-len": ["error", { "code": 180 }],
+    "@typescript-eslint/no-explicit-any": ["off"]
   }
 }
