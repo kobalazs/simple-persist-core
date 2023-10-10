@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const PersistStorage = {
   LocalStorage: 'localStorage',
