@@ -1,9 +1,9 @@
-# SimplePersist
+# SimplePersist Core
 TypeScript property decorator for easy client-side persistance
 
 ## Installation
 ```
-npm install simple-persist
+npm install @simple-persist/core
 ```
 
 ## Usage

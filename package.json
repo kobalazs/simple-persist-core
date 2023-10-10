@@ -1,6 +1,6 @@
 {
   "name": "@simple-persist/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Typescript decorator for persisting data in browser applications",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup --tsconfig tsconfig.build.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" --cache --cache-location .eslint/.eslintcache",
@@ -17,14 +17,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kobalazs/simple-persist.git"
+    "url": "git+https://github.com/kobalazs/simple-persist-core.git"
   },
   "author": "Balazs Kovacs",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kobalazs/simple-persist/issues"
+    "url": "https://github.com/kobalazs/simple-persist-core/issues"
   },
-  "homepage": "https://github.com/kobalazs/simple-persist#readme",
+  "homepage": "https://github.com/kobalazs/simple-persist-core#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
