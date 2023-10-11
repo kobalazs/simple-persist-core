@@ -1,4 +1,4 @@
 export interface Middleware<I, O> {
   encode: (value: I) => O;
-  decode: (value: O | undefined | null) => I;
+  decode: (value: O | undefined | null) => I | undefined | null;
 }

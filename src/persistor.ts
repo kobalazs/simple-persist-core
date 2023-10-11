@@ -36,7 +36,7 @@ export class Persistor<T> {
   
   public get = (): T => {
     let value = this.storage.get(this.key);
-    this.middlewares.reverse().forEach((middleware) => {
+    [...this.middlewares].reverse().forEach((middleware) => {
       value = middleware.decode(value);
     });
     return value;
