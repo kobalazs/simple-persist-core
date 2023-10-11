@@ -1,6 +1,6 @@
 /* eslint-disable no-proto */
 
-import { Persist } from './index';
+import { Persist } from './persist.decorator';
 
 // https://github.com/jestjs/jest/issues/6798#issuecomment-440988627
 const localStorageGetItemSpy = jest.spyOn(window.localStorage.__proto__, 'getItem');
