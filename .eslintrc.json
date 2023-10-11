@@ -21,6 +21,7 @@
   "root": true,
   "rules": {
     "max-len": ["error", { "code": 180 }],
-    "@typescript-eslint/no-explicit-any": ["off"]
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "@typescript-eslint/lines-between-class-members": ["warn", "always", { "exceptAfterSingleLine": true }]
   }
 }
