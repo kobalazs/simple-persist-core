@@ -22,7 +22,7 @@ describe('@Persist()', () => {
 
   it('should load value', () => {
     expect(localStorageGetItemSpy).toHaveBeenCalled();
-    expect(testBed.foo).toBeUndefined();
+    expect(testBed.foo).toBeNull();
   });
 
   it('should persist scalar value', () => {

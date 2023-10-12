@@ -13,7 +13,7 @@ describe('JsonMiddleware', () => {
 
   it('should decode', () => {
     expect(middleware.decode(undefined)).toBeUndefined();
-    expect(middleware.decode(null)).toBeUndefined();
+    expect(middleware.decode(null)).toBeNull();
     expect(middleware.decode('null')).toBeNull();
     expect(middleware.decode('1')).toBe(1);
     expect(middleware.decode('"foo"')).toBe('foo');

@@ -5,7 +5,7 @@ export class JsonMiddleware implements Middleware<any, string> {
     return JSON.stringify(value);
   }
 
-  public decode(value: string | null | undefined): any | undefined {
-    return value ? JSON.parse(value) : undefined;
+  public decode(value: string | null | undefined): any | null | undefined {
+    return value && JSON.parse(value);
   }
 }
