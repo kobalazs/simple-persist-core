@@ -1,42 +1,42 @@
 import 'jest-extended';
 import { Persistor } from './persistor';
-import { LocalStorage, Storage } from './storage';
 import { Middleware } from './middleware';
 
 describe('Persistor', () => {
-  let storage: Storage<any>;
-  let storageSetSpy: jest.SpyInstance;
-  let storageGetSpy: jest.SpyInstance;
-  let storageDeleteSpy: jest.SpyInstance;
+  const storage: Storage = window.localStorage;
+  let storageSetItemSpy: jest.SpyInstance;
+  let storageGetItemSpy: jest.SpyInstance;
+  let storageRemoveItemSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    storage = new LocalStorage();
-    storageSetSpy = jest.spyOn(storage, 'set');
-    storageGetSpy = jest.spyOn(storage, 'get');
-    storageDeleteSpy = jest.spyOn(storage, 'delete');
+    storage.clear();
+    // https://github.com/jestjs/jest/issues/6798#issuecomment-440988627
+    storageGetItemSpy = jest.spyOn(window.localStorage.__proto__, 'getItem');
+    storageSetItemSpy = jest.spyOn(window.localStorage.__proto__, 'setItem');
+    storageRemoveItemSpy = jest.spyOn(window.localStorage.__proto__, 'removeItem');
   });
 
   it('can read from storage', () => {
     const persistor = new Persistor({ keygens: [() => 'foo'], middlewares: [], storage });
-    storageGetSpy.mockReturnValueOnce('bar');
+    storageGetItemSpy.mockReturnValueOnce('bar');
     expect(persistor.get()).toBe('bar');
-    expect(storageGetSpy).toHaveBeenCalledWith('foo');
-    storageGetSpy.mockReturnValueOnce(undefined);
+    expect(storageGetItemSpy).toHaveBeenCalledWith('foo');
+    storageGetItemSpy.mockReturnValueOnce(undefined);
     expect(persistor.get()).toBeUndefined();
   });
 
   it('can write to storage', () => {
     const persistor = new Persistor({ keygens: [() => 'foo'], middlewares: [], storage });
     persistor.set('bar');
-    expect(storageSetSpy).toHaveBeenCalledWith('foo', 'bar');
+    expect(storageSetItemSpy).toHaveBeenCalledWith('foo', 'bar');
     persistor.set(undefined);
-    expect(storageSetSpy).toHaveBeenCalledWith('foo', undefined);
+    expect(storageSetItemSpy).toHaveBeenCalledWith('foo', undefined);
   });
 
   it('can delete from storage', () => {
     const persistor = new Persistor({ keygens: [() => 'foo'], middlewares: [], storage });
     persistor.delete();
-    expect(storageDeleteSpy).toHaveBeenCalledWith('foo');
+    expect(storageRemoveItemSpy).toHaveBeenCalledWith('foo');
   });
 
   it('can run keygens', () => {
@@ -49,7 +49,7 @@ describe('Persistor', () => {
     ], middlewares: [], storage });
     expect(keygen1).toHaveBeenCalledBefore(keygen2);
     persistor.get();
-    expect(storageGetSpy).toHaveBeenCalledWith('foo_keygen1_keygen2');
+    expect(storageGetItemSpy).toHaveBeenCalledWith('foo_keygen1_keygen2');
   });
 
   it('can run middlewares', () => {
@@ -72,12 +72,12 @@ describe('Persistor', () => {
       middleware2,
     ], storage });
 
-    expect(persistor.get()).toBe(undefined);
+    expect(persistor.get()).toBeNull();
     expect(spyDecode2).toHaveBeenCalledBefore(spyDecode1);
     jest.clearAllMocks();
 
     persistor.set('bar');
-    expect(storageSetSpy).toHaveBeenCalledWith('foo', 'bar_encoder1_encoder2');
+    expect(storageSetItemSpy).toHaveBeenCalledWith('foo', 'bar_encoder1_encoder2');
     expect(spyEncode1).toHaveBeenCalledBefore(spyEncode2);
     jest.clearAllMocks();
 

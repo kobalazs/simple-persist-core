@@ -1,5 +1,3 @@
-/* eslint-disable no-proto */
-
 import { Persist } from './persist.decorator';
 
 // https://github.com/jestjs/jest/issues/6798#issuecomment-440988627

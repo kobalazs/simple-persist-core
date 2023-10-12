@@ -1,18 +1,17 @@
 import { Keygen } from './keygen';
 import { JsonMiddleware, Middleware } from './middleware';
 import { Persistor } from './persistor';
-import { LocalStorage, Storage } from './storage';
 
 export interface PersistConfig {
   keygens?: Array<Keygen>,
   middlewares?: Array<Middleware<any, any>>,
-  storage?: Storage<any>,
+  storage?: Storage,
 }
 
 const defaultConfig: Required<PersistConfig> = {
   keygens: [],
   middlewares: [new JsonMiddleware()],
-  storage: new LocalStorage(),
+  storage: window.localStorage,
 };
 
 export const Persist = (config?: PersistConfig) => (target: any, memberName: string): void => {
