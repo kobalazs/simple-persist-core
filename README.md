@@ -45,8 +45,7 @@ You can [write your own storage](#storages) too!
 ### Alternate syntax
 For imperative programming use the `Persistor` class:
 ```ts
-import { Persistor } from '@simple-persist/core';
-import { JsonMiddleware } from '@simple-persist/core/middleware';
+import { Persistor, JsonMiddleware } from '@simple-persist/core';
 
 const persistor = new Persistor<string>({
   keygens: [() => 'foo'],
@@ -91,14 +90,14 @@ class FooB {
 ```
 > **Note:**  If you set up multiple keygens, they will be chained by SimplePersist.
 
-You can write your own keygen by implementing the `Keygen` interface from `@simple-persist/core/keygen`.
+You can write your own keygen by implementing the `Keygen` interface.
 
 ### Middlewares
 SimplePersist can encode values before saving them to storage. This happens by utilizing a *middleware*. Middlewares consist of two methods: `encode` and `decode`.
 
 As an example, take a look at the built-in `JsonMiddleware`. (This is the default middleware when using `@Persist()`.)
 ```ts
-import { Middleware } from '@simple-persist/core/middleware';
+import { Middleware } from '@simple-persist/core';
 
 export class JsonMiddleware implements Middleware<any, string> {
   public encode(value: any): string {
@@ -114,7 +113,7 @@ These methods are run automatically by SimplePersist. `encode()` will be called 
 
 > **Note:**  If you set up multiple middlewares, encoders will be chained in the defined order, decoders in reverse order.
 
-You can write your own middleware by implementing the `Middleware` interface from `@simple-persist/core/middleware`.
+You can write your own middleware by implementing the `Middleware` interface.
 
 ### Storages
 The native `localStorage` and `sessionStorage` (from the global scope) are compatible with SimplePersist by design:
