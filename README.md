@@ -1,6 +1,21 @@
 # SimplePersist Core
 TypeScript property decorator for easy client-side persistance
 
+#### Table of Contents
+* [Installation](#installation)
+* [Quick start](#quick-start)
+* [Caveats](#caveats)
+  * [Multi-instance use](#multi-instance-use)
+  * [Types](#types)
+  * [Storage](#storage)
+* [Advanced use](#advanced-use)
+  * [Imperative syntax](#imperative-syntax)
+  * [Keygens](#keygens)
+  * [Middlewares](#middlewares)
+  * [Storages](#storages)
+* [Extensions](#extensions)
+* [Collaboration](#collaboration)
+
 ## Installation
 ```bash
 npm install @simple-persist/core
@@ -43,7 +58,7 @@ You can [write your own storage](#storages) too!
 
 ## Advanced use
 
-### Alternate syntax
+### Imperative syntax
 For imperative programming use the `Persistor` class:
 ```ts
 import { Persistor, JsonMiddleware } from '@simple-persist/core';
