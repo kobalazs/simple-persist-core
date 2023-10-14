@@ -15,6 +15,7 @@ class Foo {
   @Persist() public bar;
 }
 ```
+> **Note:** For more features (like persisting RxJS Subjects) check out our [extensions](#extensions)!
 
 ## Caveats
 
@@ -30,7 +31,7 @@ console.log(foo2.bar); // Displays 'baz'.
 You can overcome this by [writing your own keygen](#keygens).
 
 ### Types
-By default SimplePersist can only persist scalars, as well as objects and arrays containing scalars. (Basically stuff that survives `JSON.parse(JSON.stringify(value))`.) You can overcome this by [writing your own middleware](#middlewares).
+By default SimplePersist can only persist scalars, as well as objects and arrays containing scalars. (Basically stuff that survives `JSON.parse(JSON.stringify(value))`.) You can overcome this by [writing your own middleware](#middlewares) to serialize / rehydrate your objects.
 ### Storage
 SimplePersist uses the native `localStorage` by default. You can switch to `sessionStorage` from the global scope like so:
 ```ts
@@ -64,28 +65,34 @@ persistor.delete(); // Deletes 'foo' from storage.
 By default `@Persist()` uses property names as key. This can easily become an issue:
 ```ts
 class FooA {
-  @Persist() public bar; // Persists as 'bar'.
+  @Persist()
+  public bar; // Persists as 'bar'.
 }
 class FooB {
-  @Persist() public bar; // Persists as 'bar' too, which creates conflict. :(
+  @Persist()
+  public bar; // Persists as 'bar' too, which creates conflict. :(
 }
 ```
 You can use a custom *keygen* to overcome this issue. Keygens are functions that modify the default key:
 ```ts
 class FooA {
-  @Persist({ keygens: [() => 'FooA.bar'] }) public bar; // Persists as 'FooA.bar'.
+  @Persist({ keygens: [() => 'FooA.bar'] })
+  public bar; // Persists as 'FooA.bar'.
 }
 class FooB {
-  @Persist({ keygens: [() => 'FooB.bar'] }) public bar; // Persists as 'FooB.bar'.
+  @Persist({ keygens: [() => 'FooB.bar'] })
+  public bar; // Persists as 'FooB.bar'.
 }
 ```
 Alternatively:
 ```ts
 class FooA {
-  @Persist({ keygens: [(key) => `FooA.${key}`] }) public bar; // Persists as 'FooA.bar'.
+  @Persist({ keygens: [(key) => `FooA.${key}`] })
+  public bar; // Persists as 'FooA.bar'.
 }
 class FooB {
-  @Persist({ keygens: [(key) => `FooB.${key}`] }) public bar; // Persists as 'FooB.bar'.
+  @Persist({ keygens: [(key) => `FooB.${key}`] })
+  public bar; // Persists as 'FooB.bar'.
 }
 ```
 > **Note:**  If you set up multiple keygens, they will be chained by SimplePersist.
@@ -113,7 +120,7 @@ These methods are run automatically by SimplePersist. `encode()` will be called 
 
 > **Note:**  If you set up multiple middlewares, encoders will be chained in the defined order, decoders in reverse order.
 
-You can write your own middleware by implementing the `Middleware` interface.
+Write your own middleware by implementing the `Middleware` interface or use an [extension](#extensions)!
 
 ### Storages
 The native `localStorage` and `sessionStorage` (from the global scope) are compatible with SimplePersist by design:
@@ -125,6 +132,17 @@ class Foo {
 
 You can also write your own storage wrapper by implementing the native `Storage` interface.
 
+## Extensions
+We have you covered for some common use cases with ready-to-use extensions. Check them out and [let me know](https://github.com/kobalazs) if you miss anything!
+
+| Name<br>Package  | Description  |
+|---|---|
+| **@PersistSubject()**<br>[@simple&#8209;persist/rxjs](https://www.npmjs.com/package/@simple-persist/rxjs)  | Decorator for handling RxJS Subjects & BehaviorSubjects.  |
+| **ConsoleMiddleware**<br>@simple&#8209;persist/core  | Middleware for displaying values on the console. Useful for debuging.  |
+| **DateMiddleware**<br>@simple&#8209;persist/core  | Middleware for handling JavaScript Date objects.  |
+| **JsonMiddleware**<br>@simple&#8209;persist/core  | Middleware for encoding to/from JSON. (Default when using `@Persist()`.) |
+
 ## Collaboration
 
-SimplePersist is an infant project but I'm planning to extend its functionality with time. Feel free to [open an issue](https://github.com/kobalazs/simple-persist/issues) or [contribute](https://github.com/kobalazs/simple-persist/pulls)!
+Feel free to [suggest features](https://github.com/kobalazs), [open issues](https://github.com/kobalazs/simple-persist/issues), or [contribute](https://github.com/kobalazs/simple-persist/pulls)! Also let me know about your extensions, so I can link them in this document.
+
