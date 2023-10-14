@@ -136,7 +136,7 @@ You can also write your own storage wrapper by implementing the native `Storage`
 We have you covered for some common use cases with ready-to-use extensions. Check them out and [let me know](https://github.com/kobalazs) if you miss anything!
 
 | Name<br>Package  | Description  |
-|---|---|
+|:---|:---|
 | **@PersistSubject()**<br>[@simple&#8209;persist/rxjs](https://www.npmjs.com/package/@simple-persist/rxjs)  | Decorator for handling RxJS Subjects & BehaviorSubjects.  |
 | **ConsoleMiddleware**<br>@simple&#8209;persist/core  | Middleware for displaying values on the console. Useful for debuging.  |
 | **DateMiddleware**<br>@simple&#8209;persist/core  | Middleware for handling JavaScript Date objects.  |
