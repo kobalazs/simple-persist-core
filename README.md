@@ -154,6 +154,7 @@ We have you covered for some common use cases with ready-to-use extensions. Chec
 |:---|:---|
 | **@PersistSubject()**<br>[@simple&#8209;persist/rxjs](https://www.npmjs.com/package/@simple-persist/rxjs)  | Decorator for handling RxJS Subjects & BehaviorSubjects.  |
 | **ConsoleMiddleware**<br>@simple&#8209;persist/core  | Middleware for displaying values on the console. Useful for debuging.  |
+| **CookieStorage**<br>[cookie&#8209;storage](https://www.npmjs.com/package/cookie-storage)  | Storage interface for cookies.  |
 | **DateMiddleware**<br>@simple&#8209;persist/core  | Middleware for handling JavaScript Date objects.  |
 | **JsonMiddleware**<br>@simple&#8209;persist/core  | Middleware for encoding to/from JSON. (Default when using `@Persist()`.) |
 
