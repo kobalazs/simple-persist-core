@@ -35,7 +35,7 @@ class Foo {
 ## Caveats
 
 ### Multi-instance use
-SimplePersist is the best fit for singleton use. Class instances are not observed, meaning multiple instances of the same class can cause unexpected behavior:
+SimplePersist is best fit for singleton use. Class instances are not observed, meaning multiple instances of the same class can cause unexpected behavior:
 ```ts
 const foo1 = new Foo();
 foo1.bar = 'baz';
@@ -47,11 +47,16 @@ You can overcome this by [writing your own keygen](#keygens).
 
 ### Types
 By default SimplePersist can only persist scalars, as well as objects and arrays containing scalars. (Basically stuff that survives `JSON.parse(JSON.stringify(value))`.) You can overcome this by [writing your own middleware](#middlewares) to serialize / rehydrate your objects.
+
 ### Storage
-SimplePersist uses the native `localStorage` by default. You can switch to `sessionStorage` from the global scope like so:
+SimplePersist uses the native `localStorage` by default. You can switch to native `sessionStorage` or use `cookieStorage` from the package [`cookie-storage`](https://www.npmjs.com/package/cookie-storage):
 ```ts
+import { CookieStorage } from 'cookie-storage';
+
 class Foo {
   @Persist({ storage: sessionStorage }) public bar;
+  // or
+  @Persist({ storage: new CookieStorage() }) public baz;
 }
 ```
 You can [write your own storage](#storages) too!
@@ -159,5 +164,4 @@ We have you covered for some common use cases with ready-to-use extensions. Chec
 
 ## Collaboration
 
-Feel free to [suggest features](https://github.com/kobalazs), [open issues](https://github.com/kobalazs/simple-persist/issues), or [contribute](https://github.com/kobalazs/simple-persist/pulls)! Also let me know about your extensions, so I can link them in this document.
-
+Feel free to [suggest features](https://github.com/kobalazs), [open issues](https://github.com/kobalazs/simple-persist-core/issues), or [contribute](https://github.com/kobalazs/simple-persist-core/pulls)! Also let me know about your extensions, so I can link them in this document.
