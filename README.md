@@ -14,6 +14,7 @@ TypeScript property decorator for easy client-side persistance
   * [Middlewares](#middlewares)
   * [Storages](#storages)
 * [Extensions](#extensions)
+* [Read more](#read-more)
 * [Collaboration](#collaboration)
 
 ## Installation
@@ -162,6 +163,10 @@ We have you covered for some common use cases with ready-to-use extensions. Chec
 | **CookieStorage**<br>[cookie&#8209;storage](https://www.npmjs.com/package/cookie-storage)  | Storage interface for cookies.  |
 | **DateMiddleware**<br>@simple&#8209;persist/core  | Middleware for handling JavaScript Date objects.  |
 | **JsonMiddleware**<br>@simple&#8209;persist/core  | Middleware for encoding to/from JSON. (Default when using `@Persist()`.) |
+
+## Read more
+
+Check out my article about the reasoning behind this package: [Do we need state management in Angular?](https://medium.com/@kobalazs/do-we-need-state-management-in-angular-baf612823b16)
 
 ## Collaboration
 
