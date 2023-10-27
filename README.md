@@ -14,6 +14,7 @@ TypeScript property decorator for easy client-side persistance
   * [Middlewares](#middlewares)
   * [Storages](#storages)
 * [Extensions](#extensions)
+* [Read more](#read-more)
 * [Collaboration](#collaboration)
 
 ## Installation
@@ -35,7 +36,7 @@ class Foo {
 ## Caveats
 
 ### Multi-instance use
-SimplePersist is the best fit for singleton use. Class instances are not observed, meaning multiple instances of the same class can cause unexpected behavior:
+SimplePersist is best fit for singleton use. Class instances are not observed, meaning multiple instances of the same class can cause unexpected behavior:
 ```ts
 const foo1 = new Foo();
 foo1.bar = 'baz';
@@ -56,7 +57,7 @@ import { CookieStorage } from 'cookie-storage';
 class Foo {
   @Persist({ storage: sessionStorage }) public bar;
   // or
-  @Persist({ storage: new CookieStorage() }) public bar;
+  @Persist({ storage: new CookieStorage() }) public baz;
 }
 ```
 You can [write your own storage](#storages) too!
@@ -164,7 +165,10 @@ We have you covered for some of the common use cases. Check out these extensions
 | **DateMiddleware**<br>@simple&#8209;persist/core  | Middleware for handling JavaScript Date objects.  |
 | **JsonMiddleware**<br>@simple&#8209;persist/core  | Middleware for encoding to & from JSON. (Default when using `@Persist()`.) |
 
+## Read more
+
+Check out my article about the reasoning behind this package: [Do we need state management in Angular?](https://medium.com/@kobalazs/do-we-need-state-management-in-angular-baf612823b16)
+
 ## Collaboration
 
-Feel free to [suggest features](https://github.com/kobalazs), [open issues](https://github.com/kobalazs/simple-persist/issues), or [contribute](https://github.com/kobalazs/simple-persist/pulls)! Also let me know about your extensions, so I can link them in this document.
-
+Feel free to [suggest features](https://github.com/kobalazs), [open issues](https://github.com/kobalazs/simple-persist-core/issues), or [contribute](https://github.com/kobalazs/simple-persist-core/pulls)! Also let me know about your extensions, so I can link them in this document.
