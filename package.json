@@ -1,6 +1,6 @@
 {
   "name": "@simple-persist/core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Typescript decorator for persisting data in browser applications",
   "keywords": [
     "persist",
