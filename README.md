@@ -30,7 +30,7 @@ class Foo {
   @Persist() public bar;
 }
 ```
-> **Note:** For more features (like persisting RxJS Subjects) check out our [extensions](#extensions)!
+> **Note:** For more features (like persisting Angular forms or RxJS Subjects) check out our [extensions](#extensions)!
 
 ## Caveats
 
@@ -46,12 +46,17 @@ console.log(foo2.bar); // Displays 'baz'.
 You can overcome this by [writing your own keygen](#keygens).
 
 ### Types
-By default SimplePersist can only persist scalars, as well as objects and arrays containing scalars. (Basically stuff that survives `JSON.parse(JSON.stringify(value))`.) You can overcome this by [writing your own middleware](#middlewares) to serialize / rehydrate your objects.
+By default SimplePersist can only persist scalars, as well as objects and arrays containing scalars. (Basically stuff that survives `JSON.parse(JSON.stringify(value))`.) You can overcome this by [writing your own middleware](#middlewares) to serialize & rehydrate your objects.
+
 ### Storage
-SimplePersist uses the native `localStorage` by default. You can switch to `sessionStorage` from the global scope like so:
+SimplePersist uses `localStorage` by default. You can switch to `sessionStorage` or use `cookieStorage` from [cookie&#8209;storage](https://www.npmjs.com/package/cookie-storage) like so:
 ```ts
+import { CookieStorage } from 'cookie-storage';
+
 class Foo {
   @Persist({ storage: sessionStorage }) public bar;
+  // or
+  @Persist({ storage: new CookieStorage() }) public bar;
 }
 ```
 You can [write your own storage](#storages) too!
@@ -145,18 +150,19 @@ class Foo {
 }
 ```
 
-You can also write your own storage wrapper by implementing the native `Storage` interface.
+You can also write your own storage wrapper by implementing the native `Storage` interface or use an [extension](#extensions).
 
 ## Extensions
-We have you covered for some common use cases with ready-to-use extensions. Check them out and [let me know](https://github.com/kobalazs) if you miss anything!
+We have you covered for some of the common use cases. Check out these extensions and [let me know](https://github.com/kobalazs) if you miss anything!
 
 | Name<br>Package  | Description  |
 |:---|:---|
+| **@PersistControl()**<br>[@simple&#8209;persist/angular](https://www.npmjs.com/package/@simple-persist/angular)  | Decorator for handling Angular forms.  |
 | **@PersistSubject()**<br>[@simple&#8209;persist/rxjs](https://www.npmjs.com/package/@simple-persist/rxjs)  | Decorator for handling RxJS Subjects & BehaviorSubjects.  |
-| **ConsoleMiddleware**<br>@simple&#8209;persist/core  | Middleware for displaying values on the console. Useful for debuging.  |
+| **ConsoleMiddleware**<br>@simple&#8209;persist/core  | Middleware for displaying values on the console. (Useful for debuging.)  |
 | **CookieStorage**<br>[cookie&#8209;storage](https://www.npmjs.com/package/cookie-storage)  | Storage interface for cookies.  |
 | **DateMiddleware**<br>@simple&#8209;persist/core  | Middleware for handling JavaScript Date objects.  |
-| **JsonMiddleware**<br>@simple&#8209;persist/core  | Middleware for encoding to/from JSON. (Default when using `@Persist()`.) |
+| **JsonMiddleware**<br>@simple&#8209;persist/core  | Middleware for encoding to & from JSON. (Default when using `@Persist()`.) |
 
 ## Collaboration
 
